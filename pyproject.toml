@@ -1,0 +1,21 @@
+[project]
+name = "xlwings-server-testing"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "xlwings-server>=1.2.1",
+]
+
+[dependency-groups]
+dev = [
+    "watchfiles>=1.1.1",
+]
+
+[tool.xlwings_server]
+manifest_id_dev = "11430adb-9c20-4fd2-9388-31d3853433ed"
+manifest_id_qa = "60aeb492-e0f3-4426-8db0-84f045c7b524"
+manifest_id_uat = "cef6ec7f-65d9-48ac-bfc3-7b1811f5ddc5"
+manifest_id_staging = "079c4796-9a3e-4c48-874d-3b5b2ff58f88"
+manifest_id_prod = "10c315e2-79fd-4a63-acbd-4a9f49501295"
