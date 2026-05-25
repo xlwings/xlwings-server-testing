@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json.
+// For config options, see https://containers.dev/.
+// To share Git ssh keys with the container on macOS, run on the LOCAL terminal:
+//   ssh-add ~/.ssh/id_ed25519
+{
+    "name": "xlwings Server",
+    "image": "mcr.microsoft.com/devcontainers/python:3-3.14-bookworm",
+    // Persist the uv cache across container rebuilds for faster `uv sync`.
+    "mounts": [
+        "source=xlwings-server-uv-cache,target=/home/vscode/.cache/uv,type=volume"
+    ],
+    "containerEnv": {
+        // Recommended uv settings inside containers.
+        "UV_LINK_MODE": "copy",
+        "UV_COMPILE_BYTECODE": "1"
+    },
+    // Forward FastAPI dev server.
+    "forwardPorts": [8000],
+    // Install uv and sync dependencies.
+    "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.cache/uv && pip install --user --upgrade uv && uv sync",
+    // pre-commit and git need this when the workspace is bind-mounted.
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "samuelcolvin.jinjahtml",
+                "tamasfe.even-better-toml"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports": "explicit"
+                    }
+                }
+            }
+        }
+    },
+    "remoteUser": "vscode"
+}
