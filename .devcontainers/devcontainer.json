@@ -9,15 +9,21 @@
     "mounts": [
         "source=xlwings-server-uv-cache,target=/home/vscode/.cache/uv,type=volume"
     ],
+    // Recommended uv settings inside containers.
+    // `remoteEnv` applies to interactive shells and VS Code-launched processes
+    // (containerEnv alone isn't always propagated to terminals on Codespaces).
     "containerEnv": {
-        // Recommended uv settings inside containers.
+        "UV_LINK_MODE": "copy",
+        "UV_COMPILE_BYTECODE": "1"
+    },
+    "remoteEnv": {
         "UV_LINK_MODE": "copy",
         "UV_COMPILE_BYTECODE": "1"
     },
     // Forward FastAPI dev server.
     "forwardPorts": [8000],
     // Install uv and sync dependencies.
-    "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.cache/uv && pip install --user --upgrade uv && uv sync",
+    "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.cache/uv && pip install --user --upgrade uv && UV_LINK_MODE=copy uv sync",
     // pre-commit and git need this when the workspace is bind-mounted.
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "customizations": {
