@@ -5,17 +5,21 @@
 {
     "name": "xlwings Server",
     "image": "mcr.microsoft.com/devcontainers/python:3-3.14-bookworm",
-    // Recommended uv settings inside containers. UV_LINK_MODE=copy avoids
-    // cross-filesystem hardlink warnings (esp. on GitHub Codespaces, where the
-    // workspace and ~/.cache live on different filesystems).
+    // Persist the uv cache across container rebuilds for faster `uv sync`.
+    // On local Docker this gives real reuse across rebuilds. On Codespaces the
+    // cache and workspace are on different filesystems regardless, so
+    // UV_LINK_MODE=copy is required there (and harmless locally).
+    "mounts": [
+        "source=xlwings-server-uv-cache,target=/home/vscode/.cache/uv,type=volume"
+    ],
     "containerEnv": {
         "UV_LINK_MODE": "copy",
         "UV_COMPILE_BYTECODE": "1"
     },
     // Forward FastAPI dev server.
     "forwardPorts": [8000],
-    // Install uv and sync dependencies.
-    "postCreateCommand": "pip install --user --upgrade uv && uv sync",
+    // Fix ownership on the named volume, then install uv and sync dependencies.
+    "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.cache/uv && pip install --user --upgrade uv && uv sync",
     // pre-commit and git need this when the workspace is bind-mounted.
     "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "customizations": {
