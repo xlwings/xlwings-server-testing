@@ -752,7 +752,7 @@ wheels = [
 
 [[package]]
 name = "xlwings-server"
-version = "1.5.1"
+version = "1.5.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiocache" },
@@ -775,9 +775,9 @@ dependencies = [
     { name = "uvloop", marker = "sys_platform != 'win32'" },
     { name = "xlwings" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3f/fa/8d11027f9cdefdba7c059d4777c0477d232e5b5940e6bb478e6ebc1c5d69/xlwings_server-1.5.1.tar.gz", hash = "sha256:f6c46437d0543ad98a3ad82268379f30194b5cd3fc0adbdee013f18e72a05074", size = 2479156, upload-time = "2026-05-27T12:51:56.582Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/34/41/6d7ab016dd28981bec1d486a6ff448b8ed510ca3a277d8849c504a231e41/xlwings_server-1.5.2.tar.gz", hash = "sha256:be1d59e23ce103a2993ad8f84044130d07c6752f50c0f5c0eabb12aedda858d7", size = 2479414, upload-time = "2026-05-27T14:00:42.701Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a6/f7/3cfce72352a53f0d5778d4263807ac5653d965cfffd11a0dc57a1cd4b9ff/xlwings_server-1.5.1-py3-none-any.whl", hash = "sha256:da3d52ae7e727f7d447babf7bc2183264826aa22ea29fab1c2cc2e2219b0a460", size = 2988777, upload-time = "2026-05-27T12:51:54.595Z" },
+    { url = "https://files.pythonhosted.org/packages/f4/58/ab17a837d6f9367926e8ed59a9bad4c02367aea314f3e106daf351095fe0/xlwings_server-1.5.2-py3-none-any.whl", hash = "sha256:b0f5fa135e0bea0e08785c424f22f16645130d27577c0faef7ebf6d55f44b488", size = 2989078, upload-time = "2026-05-27T14:00:40.418Z" },
 ]
 
 [[package]]
